@@ -1,10 +1,20 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
 import os
 import uvicorn
 
 app = FastAPI()
+
+# Настройка CORS - разрешаем запросы с любого домена (для продакшена лучше указать конкретный домен)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # можно заменить на ["https://image0.tilda.ws"] для безопасности
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class GenerateRequest(BaseModel):
     prompt: str
