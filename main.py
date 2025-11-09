@@ -21,7 +21,7 @@ class GenerateRequest(BaseModel):
     prompt: str
 
 # URL публичного inference API для модели FLUX.1-dev
-HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev"
+HUGGINGFACE_API_URL = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-dev"
 HUGGINGFACE_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 
 headers = {
@@ -48,4 +48,5 @@ def generate_image(req: GenerateRequest):
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8080))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
+
 
